@@ -9,11 +9,11 @@
 </head>
 <body>
 	<a href="/lista-clienti"><button>Lista Clienti</button></a>
+	<a href="/edit-page?id=-1"><button>Inserisci un nuovo cliente</button></a>
 	<ul>
 		<c:forEach items="${clientiList}" var="cliente">
-			
 			<li>
-			${cliente.nome} <a href="/edit-cliente?id=${cliente.id}"><button>Modifica</button></a></li>
+			${cliente.nome} <a href="/edit-page?id=${cliente.id}"><button>Modifica</button></a></li>
 		</c:forEach>
 	</ul>
 </body>

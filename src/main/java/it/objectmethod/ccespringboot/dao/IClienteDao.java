@@ -9,4 +9,5 @@ public interface IClienteDao {
 	public List<Cliente> getAllClienti();
 
 	public Cliente getClienteById(int id);
+
 }
