@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="">
+<form action="/edit-cliente">
 	<input type="text" name="id" value="${clienteIns.id}"></input>
 	<input type="hidden" name="regioneSel" value="${regioneSel}"></input>
 	Nome:
@@ -62,7 +62,11 @@
 	Data di nascita:
 	<input type="text" name="dataNascitaIns" value="${clienteIns.dataNascita}"></input><br>
 	Sesso:
-	<input type="text" name="sessoIns" value="${clienteIns.sesso}"></input><br>
+	<input type="radio" id="male" name="sessoIns" value="${clienteIns.sesso}"></input>
+		<label  for="male">M</label>
+	<input type="radio" id="female" name="sessoIns" value="${clienteIns.sesso}"></input>
+		<label  for="female">F</label>
+	<br>
 	Numero di Telefono:
 	<input type="text" name="telefonoIns" value="${clienteIns.telefono}"></input><br>
 	Cellulare:
@@ -91,7 +95,7 @@
 	<input type="text" name="noteIns" value="${clienteIns.note}"></input><br>
 	Email:
 	<input type="text" name="emailIns" value="${clienteIns.email}"></input>
+	<input type="submit" value="Salva"></input>
 </form>
-	<a href="/edit-cliente"><button>Salva</button></a>
 </body>
 </html>

@@ -38,9 +38,11 @@ public class ClienteController {
 		String regione = null;
 		if (id > -1) {
 			cliente = clienteDao.getClienteById(id);
-			regione = comuneDao.getRegioneByProvincia(cliente.getProvinciaNascita());
-			province = comuneDao.getAllProvince(regione);
-			comuni = comuneDao.getAllComuni(cliente.getProvinciaNascita());
+			if (cliente.getProvinciaNascita() != null) {
+				regione = comuneDao.getRegioneByProvincia(cliente.getProvinciaNascita());
+				province = comuneDao.getAllProvince(regione);
+				comuni = comuneDao.getAllComuni(cliente.getProvinciaNascita());
+			}
 			model.put("regioneSel", regione);
 		}
 		if (nomeRegione != null) {
