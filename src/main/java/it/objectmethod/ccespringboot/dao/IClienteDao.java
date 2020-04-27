@@ -10,4 +10,8 @@ public interface IClienteDao {
 
 	public Cliente getClienteById(int id);
 
+	public void postCliente(Cliente cliente);
+
+	public void putCliente(Cliente cliente);
+
 }

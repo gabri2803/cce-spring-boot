@@ -9,16 +9,16 @@
 </head>
 <body>
 <form action="">
-	<input type="hidden" name="id" value="${id}" />
-	<input type="hidden" name="regioneSel" value="${regioneSel}" />
+	<input type="text" name="id" value="${clienteIns.id}"></input>
+	<input type="hidden" name="regioneSel" value="${regioneSel}"></input>
 	Nome:
-	<input type="text" name="nomeIns" value="${clienteIns.nome}"/><br>
+	<input type="text" name="nomeIns" value="${clienteIns.nome}"></input><br>
 	Cognome:
-	<input type="text" name="cognomeIns" value="${clienteIns.cognome}"/><br>
+	<input type="text" name="cognomeIns" value="${clienteIns.cognome}"></input><br>
 	Codice Fiscale:
-	<input type="text" name="codFis" value="${clienteIns.codiceFiscale}"/><br>
+	<input type="text" name="codiceFiscaleIns" value="${clienteIns.codiceFiscale}"></input><br>
 	Stato nascita:
-	<input type="text" name="statoNasc" value="${clienteIns.statoNascita}"/><br>
+	<input type="text" name="statoNascitaIns" value="${clienteIns.statoNascita}"></input><br>
 	Seleziona la regione:
 	<select name="reg">
 		<c:forEach items="${listaRegioni}" var="regione">
@@ -31,9 +31,9 @@
 					</c:otherwise>
 				</c:choose>
 		</c:forEach>	
-	</select><a href="/edit-page"><button>Cerca provincia ${idC}</button></a><br>
+	</select><a href="/edit-page?id=${clienteIns.id}"><button>Cerca provincia ${idC}</button></a><br>
 	Provincia di nascita:
-	<select name="prov">
+	<select name="provinciaNascitaIns">
 		<c:forEach items="${listaProvince}" var="provincia">
 		<c:choose>
 			<c:when test="${clienteIns.provinciaNascita == provincia}">
@@ -45,9 +45,9 @@
 				</c:choose>
 		</c:forEach>
 	</select>
-	<button>Cerca comune</button><br>
+	<a href="/edit-page?id=${clienteIns.id}"><button>Cerca comune</button></a><br>
 	Comune di nascita:
-	<select name="com">
+	<select name="comuneNascitaIns">
 		<c:forEach items="${listaComuni}" var="comune">
 			<c:choose>
 			<c:when test="${clienteIns.comuneNascita == comune}">
@@ -60,37 +60,38 @@
 		</c:forEach>
 	</select><br>
 	Data di nascita:
-	<input type="text" name="dataNasc" value="${clienteIns.dataNascita}"/><br>
+	<input type="text" name="dataNascitaIns" value="${clienteIns.dataNascita}"></input><br>
 	Sesso:
-	<input type="text" name="sessoIns" value="${clienteIns.sesso}"/><br>
+	<input type="text" name="sessoIns" value="${clienteIns.sesso}"></input><br>
 	Numero di Telefono:
-	<input type="text" name="telefonoIns" value="${clienteIns.telefono}"/><br>
+	<input type="text" name="telefonoIns" value="${clienteIns.telefono}"></input><br>
 	Cellulare:
-	<input type="text" name="cellulareIns" value="${clienteIns.cellulare}"/><br>
+	<input type="text" name="cellulareIns" value="${clienteIns.cellulare}"></input><br>
 	Ragione Sociale:
-	<input type="text" name="ragSoc" value="${clienteIns.ragioneSociale}"/><br>
+	<input type="text" name="ragioneSocialeIns" value="${clienteIns.ragioneSociale}"></input><br>
 	Partita IVA:
-	<input type="text" name="partIva" value="${clienteIns.partitaIva}"/><br>
+	<input type="text" name="partitaIvaIns" value="${clienteIns.partitaIva}"></input><br>
 	Banca di appoggio:
-	<input type="text" name="banca" value="${clienteIns.bancaAppoggio}"/><br>
+	<input type="text" name="bancaAppoggioIns" value="${clienteIns.bancaAppoggio}"></input><br>
 	ABI:
-	<input type="text" name="abiIns" value="${clienteIns.abi}"/><br>
+	<input type="text" name="abiIns" value="${clienteIns.abi}"></input><br>
 	CAB:
-	<input type="text" name="cabIns" value="${clienteIns.cab}"/><br>
+	<input type="text" name="cabIns" value="${clienteIns.cab}"></input><br>
 	Codice zona:
-	<input type="text" name="codZona" value="${clienteIns.codiceZona}"/><br>
+	<input type="text" name="codiceZonaIns" value="${clienteIns.codiceZona}"></input><br>
 	Codice cliente:
-	<input type="text" name="codCliente" value="${clienteIns.codiceCliente}"/><br>
+	<input type="text" name="codiceClienteIns" value="${clienteIns.codiceCliente}"></input><br>
 	Stato:
-	<input type="text" name="statoIns" value="${clienteIns.stato}"/><br>
+	<input type="text" name="statoIns" value="${clienteIns.stato}"></input><br>
 	Tipo:
-	<input type="text" name="tipoIns" value="${clienteIns.tipo}"/><br>
+	<input type="text" name="tipoIns" value="${clienteIns.tipo}"></input><br>
 	Condizioni pagamento:
-	<input type="text" name="condPag" value="${clienteIns.condizioniPagamento}"/><br>
+	<input type="text" name="condizioniPagamentoIns" value="${clienteIns.condizioniPagamento}"></input><br>
 	Note:
-	<input type="text" name="noteIns" value="${clienteIns.note}"/><br>
+	<input type="text" name="noteIns" value="${clienteIns.note}"></input><br>
 	Email:
-	<input type="text" name="emailIns" value="${clienteIns.email}"/>
+	<input type="text" name="emailIns" value="${clienteIns.email}"></input>
 </form>
+	<a href="/edit-cliente"><button>Salva</button></a>
 </body>
 </html>
