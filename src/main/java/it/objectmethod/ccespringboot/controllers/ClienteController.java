@@ -2,9 +2,13 @@ package it.objectmethod.ccespringboot.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,48 +31,34 @@ public class ClienteController {
 		return "list-clients";
 	}
 
-	@RequestMapping("/edit-page")
-	public String editPageCliente(ModelMap model, @RequestParam(name = "id", required = false) int id,
-			@RequestParam(name = "reg", required = false) String nomeRegione,
-			@RequestParam(name = "provinciaNascita", required = false) String nomeProvincia) {
+	@GetMapping("/edit-page")
+	public String editPageCliente(ModelMap model, @RequestParam(name = "id", required = false) String idIns) {
 		Cliente cliente = null;
-		List<String> regioni = null;
-		List<String> province = null;
-		List<String> comuni = null;
 		String regione = null;
-		if (id > -1) {
+		List<String> regioni = null;
+		if (idIns != null && idIns != "") {
+			int id = Integer.parseInt(idIns);
 			cliente = clienteDao.getClienteById(id);
 			if (cliente.getProvinciaNascita() != null) {
 				regione = comuneDao.getRegioneByProvincia(cliente.getProvinciaNascita());
-				province = comuneDao.getAllProvince(regione);
-				comuni = comuneDao.getAllComuni(cliente.getProvinciaNascita());
 			}
 			model.put("regioneSel", regione);
 		}
-		if (nomeRegione != null) {
-			province = comuneDao.getAllProvince(nomeRegione);
-			model.put("regioneSel", nomeRegione);
-		}
-		if (nomeProvincia != null) {
-			comuni = comuneDao.getAllComuni(nomeProvincia);
-		}
-		regioni = comuneDao.getaAllRegioni();
-		model.put("id", id);
-		model.put("listaComuni", comuni);
-		model.put("listaProvince", province);
+		regioni = comuneDao.getAllRegioni();
 		model.put("listaRegioni", regioni);
+		model.put("id", idIns);
 		model.put("clienteIns", cliente);
 		return "edit-clienti";
 	}
 
-	@RequestMapping("/edit-cliente")
+	@PostMapping("/edit-cliente")
 	public String editCliente(ModelMap model, @RequestParam(name = "id", required = false) String idNew,
 			@RequestParam(name = "nomeIns", required = false) String nome,
 			@RequestParam(name = "cognomeIns", required = false) String cognome,
 			@RequestParam(name = "codiceFiscaleIns", required = false) String codFisc,
 			@RequestParam(name = "statoNascitaIns", required = false) String statoNasc,
-			@RequestParam(name = "provinciaNascitaIns", required = false) String provNasc,
-			@RequestParam(name = "comuneNascitaIns", required = false) String comNasc,
+			@RequestParam(name = "provinciaNascitaSel", required = false) String provNasc,
+			@RequestParam(name = "comuneNascitaSel", required = false) String comNasc,
 			@RequestParam(name = "dataNascitaIns", required = false) String dataNasc,
 			@RequestParam(name = "sessoIns", required = false) String sesso,
 			@RequestParam(name = "telefonoIns", required = false) String telef,
@@ -84,8 +74,10 @@ public class ClienteController {
 			@RequestParam(name = "tipoIns", required = false) String tipo,
 			@RequestParam(name = "condizioniPagamentoIns", required = false) String condPag,
 			@RequestParam(name = "noteIns", required = false) String note,
-			@RequestParam(name = "emailIns", required = false) String email) {
+			@RequestParam(name = "emailIns", required = false) String email, HttpSession session) {
 		Cliente nuovoCliente = new Cliente();
+		provNasc = (String) model.getAttribute("provinciaNascitaIns");
+		comNasc = (String) model.getAttribute("comuneNascitaIns");
 		nuovoCliente.setNome(nome);
 		nuovoCliente.setCognome(cognome);
 		nuovoCliente.setCodiceFiscale(codFisc);

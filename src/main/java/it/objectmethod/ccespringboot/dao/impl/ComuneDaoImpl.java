@@ -20,7 +20,7 @@ public class ComuneDaoImpl extends NamedParameterJdbcDaoSupport implements IComu
 	}
 
 	@Override
-	public List<String> getaAllRegioni() {
+	public List<String> getAllRegioni() {
 		String sql = "SELECT DISTINCT regione FROM comune";
 		List<String> regioni = getJdbcTemplate().queryForList(sql, String.class);
 		return regioni;

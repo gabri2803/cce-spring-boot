@@ -9,7 +9,7 @@
 </head>
 <body>
 	<a href="/lista-clienti"><button>Lista Clienti</button></a>
-	<a href="/edit-page?id=-1"><button>Inserisci un nuovo cliente</button></a>
+	<a href="/edit-page"><button>Inserisci un nuovo cliente</button></a>
 	<ul>
 		<c:forEach items="${clientiList}" var="cliente">
 			<li>

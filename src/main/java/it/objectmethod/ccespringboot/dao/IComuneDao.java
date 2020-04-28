@@ -3,7 +3,7 @@ package it.objectmethod.ccespringboot.dao;
 import java.util.List;
 
 public interface IComuneDao {
-	public List<String> getaAllRegioni();
+	public List<String> getAllRegioni();
 
 	public List<String> getAllProvince(String nomeRegione);
 

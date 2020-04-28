@@ -8,19 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/edit-cliente">
-	<input type="text" name="id" value="${clienteIns.id}"></input>
-	<input type="hidden" name="regioneSel" value="${regioneSel}"></input>
-	Nome:
-	<input type="text" name="nomeIns" value="${clienteIns.nome}"></input><br>
-	Cognome:
-	<input type="text" name="cognomeIns" value="${clienteIns.cognome}"></input><br>
-	Codice Fiscale:
-	<input type="text" name="codiceFiscaleIns" value="${clienteIns.codiceFiscale}"></input><br>
-	Stato nascita:
-	<input type="text" name="statoNascitaIns" value="${clienteIns.statoNascita}"></input><br>
+<form action="/drop-menu" method="get">
 	Seleziona la regione:
-	<select name="reg">
+	<select name="regioneSel" onChange="submit">
 		<c:forEach items="${listaRegioni}" var="regione">
 		<c:choose>
 			<c:when test="${regioneSel == regione}">
@@ -31,9 +21,9 @@
 					</c:otherwise>
 				</c:choose>
 		</c:forEach>	
-	</select><a href="/edit-page?id=${clienteIns.id}"><button>Cerca provincia ${idC}</button></a><br>
+	</select><a href="/drop-menu?regioneSel=${regione}"><button>Cerca provincia </button></a><br>
 	Provincia di nascita:
-	<select name="provinciaNascitaIns">
+	<select name="provinciaNascitaIns" onChange="submit">
 		<c:forEach items="${listaProvince}" var="provincia">
 		<c:choose>
 			<c:when test="${clienteIns.provinciaNascita == provincia}">
@@ -45,7 +35,7 @@
 				</c:choose>
 		</c:forEach>
 	</select>
-	<a href="/edit-page?id=${clienteIns.id}"><button>Cerca comune</button></a><br>
+	<a href="/drop-menu?provinciaNascitaIns=${provincia}"><button>Cerca comune</button></a><br>
 	Comune di nascita:
 	<select name="comuneNascitaIns">
 		<c:forEach items="${listaComuni}" var="comune">
@@ -59,13 +49,30 @@
 				</c:choose>
 		</c:forEach>
 	</select><br>
+	<input type="submit" value="Carica comune"/>
+</form>
+<form action="/edit-cliente" method="post">
+	<input type="text" name="id" value="${clienteIns.id}"></input>
+	<input type="text" name="provinciaNascitaSel" value="${clienteIns.provinciaNascita}"/>
+	<input type="text" name="comuneNascitaSel" value="${clienteIns.comuneNascita}"/>
+	Nome:
+	<input type="text" name="nomeIns" value="${clienteIns.nome}"></input><br>
+	Cognome:
+	<input type="text" name="cognomeIns" value="${clienteIns.cognome}"></input><br>
+	Codice Fiscale:
+	<input type="text" name="codiceFiscaleIns" value="${clienteIns.codiceFiscale}"></input><br>
+	Stato nascita:
+	<input type="text" name="statoNascitaIns" value="${clienteIns.statoNascita}"></input><br>
+	
 	Data di nascita:
 	<input type="text" name="dataNascitaIns" value="${clienteIns.dataNascita}"></input><br>
 	Sesso:
-	<input type="radio" id="male" name="sessoIns" value="${clienteIns.sesso}"></input>
+	<input type="radio" id="male" name="sessoIns" value="${clienteIns.sesso}">
 		<label  for="male">M</label>
-	<input type="radio" id="female" name="sessoIns" value="${clienteIns.sesso}"></input>
+	</input>
+	<input type="radio" id="female" name="sessoIns" value="${clienteIns.sesso}">
 		<label  for="female">F</label>
+	</input>
 	<br>
 	Numero di Telefono:
 	<input type="text" name="telefonoIns" value="${clienteIns.telefono}"></input><br>
@@ -95,7 +102,7 @@
 	<input type="text" name="noteIns" value="${clienteIns.note}"></input><br>
 	Email:
 	<input type="text" name="emailIns" value="${clienteIns.email}"></input>
-	<input type="submit" value="Salva"></input>
+	<input type="submit" value="Salva"/>
 </form>
 </body>
 </html>
