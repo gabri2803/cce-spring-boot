@@ -57,6 +57,8 @@ public class ComuneController {
 		prepareDropMenu(model, nomeRegione, provNasc);
 		model.addAttribute("sessoM", "M");
 		model.addAttribute("sessoF", "F");
+		model.addAttribute("tipoPg", "PG");
+		model.addAttribute("tipoPs", "PS");
 		model.addAttribute("comuneSel", comNasc);
 		model.addAttribute("clienteIns", cliente);
 		return "edit-clienti";

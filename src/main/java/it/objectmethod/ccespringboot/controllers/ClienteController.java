@@ -65,6 +65,8 @@ public class ClienteController {
 		}
 		model.addAttribute("sessoM", "M");
 		model.addAttribute("sessoF", "F");
+		model.addAttribute("tipoPg", "PG");
+		model.addAttribute("tipoPs", "PS");
 		model.addAttribute("provinciaSel", provNasc);
 		model.addAttribute("comuneSel", comNasc);
 		model.addAttribute("listaRegioni", regioni);
