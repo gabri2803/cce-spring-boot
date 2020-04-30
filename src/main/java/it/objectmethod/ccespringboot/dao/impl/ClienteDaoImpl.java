@@ -97,4 +97,41 @@ public class ClienteDaoImpl extends NamedParameterJdbcDaoSupport implements ICli
 		getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
+	@Override
+	public Cliente salvaVariabili(String nome, String cognome, String codFisc, String statoNasc, String provNasc,
+			String comNasc, String dataNasc, String sesso, String telef, String cell, String ragSoc, String iva,
+			String bancaAp, String abi, String cab, String codZona, String codCli, String stato, String tipo,
+			String condPag, String note, String email) {
+		Cliente cliente = new Cliente();
+		cliente.setNome(nome);
+		cliente.setCognome(cognome);
+		cliente.setCodiceFiscale(codFisc);
+		cliente.setStatoNascita(statoNasc);
+		cliente.setProvinciaNascita(provNasc);
+		cliente.setComuneNascita(comNasc);
+		cliente.setDataNascita(dataNasc);
+		cliente.setSesso(sesso);
+		cliente.setTelefono(telef);
+		cliente.setCellulare(cell);
+		cliente.setRagioneSociale(ragSoc);
+		cliente.setPartitaIva(iva);
+		cliente.setBancaAppoggio(bancaAp);
+		cliente.setAbi(abi);
+		cliente.setCab(cab);
+		cliente.setTipo(tipo);
+		cliente.setCodiceZona(codZona);
+		cliente.setCodiceCliente(codCli);
+		cliente.setStato(stato);
+		cliente.setCondizioniPagamento(condPag);
+		cliente.setNote(note);
+		cliente.setEmail(email);
+		return cliente;
+
+	}
+
+	@Override
+	public void deleteCliente(int id) {
+		String sql = "DELETE FROM cliente WHERE id=?";
+		getJdbcTemplate().update(sql, new Object[] { id });
+	}
 }
