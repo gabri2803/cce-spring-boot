@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form action="/drop-menu" method="POST">
-		<input type="text" name="id" value="${id}"></input><br>
+		<input type="hidden" name="id" value="${id}"></input><br>
 		 Nome: <input type="text" name="nomeIns"
 			value="${clienteIns.nome}"></input><br> Cognome: <input
 			type="text" name="cognomeIns" value="${clienteIns.cognome}"></input><br>
