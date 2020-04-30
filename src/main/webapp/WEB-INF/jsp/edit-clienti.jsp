@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>Inserisci o modifica il cliente</h1>
 	<form action="/drop-menu" method="POST">
 		<input type="hidden" name="id" value="${id}"></input><br>
 		 Nome: <input type="text" name="nomeIns"
