@@ -49,12 +49,12 @@ public class ComuneController {
 		if (idCliente != null && idCliente != "") {
 			int id = Integer.parseInt(idCliente);
 			cliente = clienteDao.getClienteById(id);
-			model.addAttribute("id", idCliente);
 		} else {
 			cliente = clienteDao.salvaVariabili(nome, cognome, codFisc, statoNasc, provNasc, comNasc, dataNasc, sesso,
 					telef, cell, ragSoc, iva, bancaAp, abi, cab, codZona, codCli, stato, tipoIns, condPag, note, email);
 		}
 		prepareDropMenu(model, nomeRegione, provNasc);
+		model.addAttribute("id", idCliente);
 		model.addAttribute("sessoM", "M");
 		model.addAttribute("sessoF", "F");
 		model.addAttribute("tipoPg", "PG");

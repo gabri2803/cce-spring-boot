@@ -12,10 +12,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form action="/drop-menu" method="POST">
 	<div class="container">
-		<div class="col-sm-8">
-			<h1>Inserisci o modifica il cliente</h1>
-			<form action="/drop-menu" method="POST">
+			<h2>Inserisci o modifica il cliente</h2>
+		<div class="row">
+		<div class="col-sm">
 				<input type="hidden" name="id" value="${id}"></input><br> Nome:
 				<input type="text" class="form-control"
 					aria-label="Sizing example input"
@@ -31,60 +32,8 @@
 				Stato nascita: <input type="text" class="form-control"
 					aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-sm" name="statoNascitaIns"
-					value="${clienteIns.statoNascita}"></input><br> Provincia di
-				nascita: <input type="text" class="form-control"
-					aria-label="Sizing example input"
-					aria-describedby="inputGroup-sizing-sm" name="provinciaNascitaSel"
-					value="${provinciaSel}" /><br> Comune di nascita: <input
-					type="text" class="form-control" aria-label="Sizing example input"
-					aria-describedby="inputGroup-sizing-sm" name="comuneNascitaSel"
-					value="${comuneSel}" /><br>
-				<hr>
-				<div class="col-sm-6">
-					Modifica comune di nascita:<br> Seleziona la regione: <select
-						class="custom-select" name="regioneSel"
-						onchange="this.form.submit()">
-						<option value="">------</option>
-						<c:forEach items="${listaRegioni}" var="regione">
-							<c:choose>
-								<c:when test="${regione == regioneIns}">
-									<option value="${regione}" selected>${regione}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${regione}">${regione}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select><br> Seleziona provincia: <select class="custom-select"
-						name="provinciaNascitaIns" onchange="this.form.submit()">
-						<option value="">------</option>
-						<c:forEach items="${listaProvince}" var="provincia">
-							<c:choose>
-								<c:when test="${ provincia == provinciaSel}">
-									<option value="${provincia}" selected>${provincia}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${provincia}">${provincia}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select><br> Seleziona comune: <select class="custom-select"
-						name="comuneNascitaIns" onchange="this.form.submit()">
-						<option value="">------</option>
-						<c:forEach items="${listaComuni}" var="comune">
-							<c:choose>
-								<c:when test="${comune == comuneSel}">
-									<option value="${comune}" selected>${comune}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${comune}">${comune}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select><br>
-				</div>
-				<hr>
-				Data di nascita: <input type="text" class="form-control"
+					value="${clienteIns.statoNascita}"></input><br>
+					Data di nascita: <input type="text" class="form-control"
 					aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-sm" name="dataNascitaIns"
 					value="${clienteIns.dataNascita}"></input><br> Sesso:
@@ -159,7 +108,6 @@
 					type="text" class="form-control" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-sm" name="statoIns"
 					value="${clienteIns.stato}"></input><br> Tipo:
-
 				<c:choose>
 					<c:when test="${clienteIns.tipo == tipoPg}">
 						<div class="form-check">
@@ -207,8 +155,74 @@
 					value="${clienteIns.email}"></input><br>
 				<button class="btn btn-success" type="submit"
 					formaction="/edit-cliente">Salva</button>
-			</form>
+				</div>
+				<div class="col-sm">
+				<p><h3>Modifica comune di nascita:</h3></p>
+					<p>Seleziona la regione: <select
+						class="custom-select" name="regioneSel"
+						onchange="this.form.submit()">
+						<option value="">------</option>
+						<c:forEach items="${listaRegioni}" var="regione">
+							<c:choose>
+								<c:when test="${regione == regioneIns}">
+									<option value="${regione}" selected>${regione}</option>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${regione == regioneCli}">
+										<option value="${regione}" selected>${regione}</option>
+									</c:when>
+									<c:otherwise>
+									<option value="${regione}">${regione}</option>
+									</c:otherwise>
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select><br> Seleziona provincia: <select class="custom-select"
+						name="provinciaNascitaIns" onchange="this.form.submit()">
+						<option value="">------</option>
+						<c:forEach items="${listaProvince}" var="provincia">
+							<c:choose>
+								<c:when test="${provincia == provinciaSel}">
+									<option value="${provincia}" selected>${provincia}</option>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${provincia == clienteIns.provinciaNascita}">
+										<option value="${provincia}" selected>${provincia}</option>
+									</c:when>
+									<c:otherwise>
+									<option value="${provincia}">${provincia}</option>
+									</c:otherwise>
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select><br> Seleziona comune: <select class="custom-select"
+						name="comuneNascitaIns" onchange="this.form.submit()">
+						<option value="">------</option>
+						<c:forEach items="${listaComuni}" var="comune">
+							<c:choose>
+								<c:when test="${comune == comuneSel}">
+									<option value="${comune}" selected>${comune}</option>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${comune == clienteIns.comuneNascita}">
+										<option value="${comune}" selected>${comune}</option>
+									</c:when>
+									<c:otherwise>
+									<option value="${comune}">${comune}</option>
+									</c:otherwise>
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select></p>
+				</div>
 		</div>
 	</div>
+</form>
 </body>
 </html>

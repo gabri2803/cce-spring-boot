@@ -28,47 +28,30 @@ public class ClienteController {
 	}
 
 	@RequestMapping("/edit-page")
-	public String editPageCliente(ModelMap model, @RequestParam(name = "id", required = false) int idIns,
-			@RequestParam(name = "regioneSel", required = false) String nomeRegione,
-			@RequestParam(name = "nomeIns", required = false) String nome,
-			@RequestParam(name = "cognomeIns", required = false) String cognome,
-			@RequestParam(name = "codiceFiscaleIns", required = false) String codFisc,
-			@RequestParam(name = "statoNascitaIns", required = false) String statoNasc,
-			@RequestParam(name = "provinciaNascitaIns", required = false) String provNasc,
-			@RequestParam(name = "comuneNascitaIns", required = false) String comNasc,
-			@RequestParam(name = "dataNascitaIns", required = false) String dataNasc,
-			@RequestParam(name = "sessoIns", required = false) String sesso,
-			@RequestParam(name = "telefonoIns", required = false) String telef,
-			@RequestParam(name = "cellulareIns", required = false) String cell,
-			@RequestParam(name = "ragioneSocialeIns", required = false) String ragSoc,
-			@RequestParam(name = "partitaIvaIns", required = false) String iva,
-			@RequestParam(name = "bancaAppoggioIns", required = false) String bancaAp,
-			@RequestParam(name = "abiIns", required = false) String abi,
-			@RequestParam(name = "cabIns", required = false) String cab,
-			@RequestParam(name = "codiceZonaIns", required = false) String codZona,
-			@RequestParam(name = "codiceClienteIns", required = false) String codCli,
-			@RequestParam(name = "statoIns", required = false) String stato,
-			@RequestParam(name = "tipoIns", required = false) String tipoIns,
-			@RequestParam(name = "condizioniPagamentoIns", required = false) String condPag,
-			@RequestParam(name = "noteIns", required = false) String note,
-			@RequestParam(name = "emailIns", required = false) String email) {
+	public String editPageCliente(ModelMap model, @RequestParam(name = "id", required = false) int idIns) {
 		List<String> regioni = comuneDao.getAllRegioni();
+		List<String> province = null;
+		List<String> comuni = null;
 		Cliente cliente = null;
+		String regione = null;
 		if (idIns > -1) {
 			cliente = clienteDao.getClienteById(idIns);
-			provNasc = cliente.getProvinciaNascita();
-			comNasc = cliente.getComuneNascita();
 			model.addAttribute("id", idIns);
-		} else {
-			cliente = clienteDao.salvaVariabili(nome, cognome, codFisc, statoNasc, provNasc, comNasc, dataNasc, sesso,
-					telef, cell, ragSoc, iva, bancaAp, abi, cab, codZona, codCli, stato, tipoIns, condPag, note, email);
+			if (cliente.getProvinciaNascita() != null) {
+				regione = comuneDao.getRegioneByProvincia(cliente.getProvinciaNascita());
+				province = comuneDao.getAllProvince(regione);
+				if (cliente.getComuneNascita() != null) {
+					comuni = comuneDao.getAllComuni(cliente.getProvinciaNascita());
+				}
+			}
 		}
+		model.addAttribute("listaComuni", comuni);
+		model.addAttribute("listaProvince", province);
+		model.addAttribute("regioneCli", regione);
 		model.addAttribute("sessoM", "M");
 		model.addAttribute("sessoF", "F");
 		model.addAttribute("tipoPg", "PG");
 		model.addAttribute("tipoPs", "PS");
-		model.addAttribute("provinciaSel", provNasc);
-		model.addAttribute("comuneSel", comNasc);
 		model.addAttribute("listaRegioni", regioni);
 		model.addAttribute("clienteIns", cliente);
 		return "edit-clienti";
@@ -81,8 +64,8 @@ public class ClienteController {
 			@RequestParam(name = "cognomeIns", required = false) String cognome,
 			@RequestParam(name = "codiceFiscaleIns", required = false) String codFisc,
 			@RequestParam(name = "statoNascitaIns", required = false) String statoNasc,
-			@RequestParam(name = "provinciaNascitaSel", required = false) String provNasc,
-			@RequestParam(name = "comuneNascitaSel", required = false) String comNasc,
+			@RequestParam(name = "provinciaNascitaIns", required = false) String provNasc,
+			@RequestParam(name = "comuneNascitaIns", required = false) String comNasc,
 			@RequestParam(name = "dataNascitaIns", required = false) String dataNasc,
 			@RequestParam(name = "sessoIns", required = false) String sesso,
 			@RequestParam(name = "telefonoIns", required = false) String telef,
